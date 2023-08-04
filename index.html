@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Wing Chun Kali System Houston</title>
+
+    <link href="semantic/dist/semantic.min.css" rel="stylesheet" />
+    <link href="node_modules/ol/ol.css" rel="stylesheet" />
+
+    <style>
+
+        .ol-popup {
+            position: absolute;
+            background-color: white;
+            color: black;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            bottom: 12px;
+            left: -50px;
+            min-width: 280px;
+        }
+
+            .ol-popup:after, .ol-popup:before {
+                top: 100%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+            }
+
+            .ol-popup:after {
+                border-top-color: white;
+                border-width: 10px;
+                left: 48px;
+                margin-left: -10px;
+            }
+
+            .ol-popup:before {
+                border-top-color: #cccccc;
+                border-width: 11px;
+                left: 48px;
+                margin-left: -11px;
+            }
+
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+        }
+
+            .ol-popup-closer:after {
+                content: "✖";
+            }
+    </style>
+
+    <style type="text/css">
+        body {
+            min-width:500px;
+        }
+
+        iframe {
+            height: 100vh;
+            width: 100vw;
+            border: 0;
+            overflow:hidden;
+        }
+
+        .hidden.menu {
+            display: none;
+        }
+
+        .masthead.segment {
+            min-height: 300px;
+            padding: 1em 0em;
+        }
+
+        .masthead .logo.item img {
+            margin-right: 1em;
+        }
+
+        .masthead .ui.menu .ui.button {
+            margin-left: 0.5em;
+        }
+
+        .masthead h1.ui.header {
+            margin-top: 3em;
+            margin-bottom: 0em;
+            font-size: 4em;
+            font-weight: normal;
+        }
+
+        .masthead h2 {
+            font-size: 1.7em;
+            font-weight: normal;
+        }
+
+        .ui.vertical.stripe {
+            padding: 8em 0em;
+        }
+
+        .ui.vertical.stripe h3 {
+            font-size: 2em;
+        }
+
+        .ui.vertical.stripe .button + h3,
+        .ui.vertical.stripe p + h3 {
+            margin-top: 3em;
+        }
+
+        .ui.vertical.stripe .floated.image {
+            clear: both;
+        }
+
+        .ui.vertical.stripe p {
+            font-size: 1.33em;
+        }
+
+        .ui.vertical.stripe .horizontal.divider {
+            margin: 3em 0em;
+        }
+
+        .quote.stripe.segment {
+            padding: 0em;
+        }
+
+        .quote.stripe.segment .grid .column {
+            padding-top: 5em;
+            padding-bottom: 5em;
+        }
+
+        .footer.segment {
+            padding: 5em 0em;
+        }
+
+        .secondary.pointing.menu .toc.item {
+            display: none;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .ui.fixed.menu {
+                display: none !important;
+            }
+
+            .secondary.pointing.menu .item,
+            .secondary.pointing.menu .menu {
+                display: none;
+            }
+
+            .secondary.pointing.menu .toc.item {
+                display: block;
+            }
+
+            .masthead.segment {
+                min-height: 300px;
+            }
+
+            .masthead h1.ui.header {
+                font-size: 2em;
+                margin-top: 1.5em;
+            }
+
+            .masthead h2 {
+                margin-top: 0.5em;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+    <script src="semantic/dist/components/visibility.js"></script>
+    <script src="semantic/dist/components/sidebar.js"></script>
+    <script src="semantic/dist/components/transition.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+    <script type="module" src="js/map.js"></script>
+    <script src="node_modules/ol/dist/ol.js"></script>
+
+    <script>
+      $(document).ready(function() {
+          // fix menu when passed
+          $('.masthead')
+            .visibility({
+              once: false,
+              onBottomPassed: function() {
+                $('.fixed.menu').transition('fade in');
+              },
+              onBottomPassedReverse: function() {
+                $('.fixed.menu').transition('fade out');
+              }
+            });
+
+          // create sidebar and attach to menu open
+          $('.ui.sidebar')
+            .sidebar('attach events', '.toc.item');
+        });
+    </script>
+</head>
+<body>
+
+    <!-- header menu -->
+    <div class="ui top fixed hidden menu">
+        <div class="ui container">
+            <a class="active item homepage" onclick="navigate('homepage')">
+                <i class="home icon"></i>Home
+            </a>
+            <a class="item aboutpage" onclick="navigate('aboutpage')">
+                <i class="info icon"></i>About
+            </a>
+            <a class="item schedulepage" onclick="navigate('schedulepage')">
+                <i class="calendar icon"></i>Schedule
+            </a>
+            <div class="ui simple dropdown item">
+                More
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item contactpage" onclick="navigate('contactpage')"><i class="mail icon"></i>Contact</a>
+                    <a class="item faqpage" onclick="navigate('faqpage')"><i class="question icon"></i>FAQ</a>
+                </div>
+            </div>
+            <div class="right menu">
+                <img class="ui inverted" src="images/wing-chun-kali-system-site-icon.png" style="height:50px;" />
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="ui vertical inverted sidebar menu">
+        <a class="active item homepage" onclick="navigate('homepage')">Home</a>
+        <a class="item aboutpage" onclick="navigate('aboutpage')">About</a>
+        <a class="item schedulepage" onclick="navigate('schedulepage')">Schedule</a>
+        <a class="item contactpage" onclick="navigate('contactpage')">Contact</a>
+        <a class="item faqpage" onclick="navigate('faqpage')">FAQ</a>
+    </div>
+
+    <!-- page contents -->
+    <div class="pusher">
+        <!-- masthead -->
+        <div class="ui inverted masthead center aligned top attached basic segment row" style="background-color:black; margin-bottom:20px;">
+            <!--top masthead menu-->
+            <div class="ui container">
+                <div class="ui big secondary inverted pointing menu">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i>
+                    </a>
+                    <a class="active item homepage" onclick="navigate('homepage')">
+                        <i class="home icon"></i>Home
+                    </a>
+                    <a class="item aboutpage" onclick="navigate('aboutpage')">
+                        <i class="info icon"></i>About
+                    </a>
+                    <a class="item schedulepage" onclick="navigate('schedulepage')">
+                        <i class="calendar icon"></i>Schedule
+                    </a>
+                    <div class="ui simple dropdown item">
+                        More
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item contactpage" onclick="navigate('contactpage')"><i class="mail icon"></i>Contact</a>
+                            <a class="item faqpage" onclick="navigate('faqpage')"><i class="question icon"></i>FAQ</a>
+                        </div>
+                    </div>
+                    <div class="right menu">
+                        <img class="ui inverted" src="images/wing-chun-kali-system-site-logo.png" style="height:80px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="ui container right aligned" style="position: relative; display: flex; max-height: 400px;">
+                <img id="mastheadImage" class="ui fluid rounded image" src="images/wing-chun-kali-system-houston-texas.jpg" style="margin-top:20px;object-fit:none; object-position:50% 0" />
+                <div style="position:absolute;bottom:20px;left:20px;opacity:0.9">
+                    <h1 style="color:white;font-family:Impact,fantasy;">Wing Chun Kali System</h1>
+                    <h2 style="color: firebrick; font-family: Impact,fantasy; margin-top: -10px">- HOUSTON</h2>
+                </div>
+            </div>
+        </div>
+
+        <iframe id="mainFrame" src="home.html" frameborder="0" scrolling="yes" onload="resizeIframe()" style="height:fit-content"></iframe>
+
+        <!-- footer -->
+        <div class="ui inverted bottom attached basic segment very padded" style="margin-top:50px;">
+            <div class="ui container">
+                <div class="ui stackable inverted divided equal height stackable grid center aligned">
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">Socials</h4>
+                        <div class="ui animated list">
+                            <div class="item"><form><button class="ui facebook button" style="width:125px;" formaction="http://facebook.com/wckshouston" formtarget="_blank"><i class="facebook icon"></i>Facebook</button></form></div>
+                            <div class="item"><form><button class="ui tiktok button" style="width:125px;" formaction="http://tiktok.com/@wckshouston" formtarget="_blank"><i class="tiktok icon"></i>TikTok</button></form></div>
+                            <div class="item"><form><button class="ui youtube button" style="width:125px;" formaction="https://www.youtube.com/user/wingchunkalisystem/videos" formtarget="_blank"><i class="youtube icon"></i>YouTube</button></form></div>
+                        </div>
+                    </div>
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">Contact Us</h4>
+                        <div class="ui animated list">
+                            <div class="item"><form><button class="ui icon button" formaction=""><i class="phone icon"></i></button></form></div>
+                            <div class="item"><form><button class="ui icon button" formaction=""><i class="mail icon"></i></button></form></div>
+                        </div>
+
+                    </div>
+                    <div class="ten wide column">
+                        <h4 class="ui inverted header">Location</h4>
+                        <div class="ui segments">
+                            <div class="ui  inverted segment">
+                                <p>
+                                    <i class="home icon"></i>Wing Chun Kali System<br />
+                                    (Inside Iron Sports)
+                                </p>
+                                <p>
+                                    6982 FM 1960 W Ste F 2nd Floor Houston Texas 77069
+                                </p>
+                            </div>
+                            <div class="ui inverted secondary basic segment ">
+                                <div id="map" class="map" style="height:300px;"></div>
+                                <div id="popup" class="ol-popup">
+                                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                                    <div id="popup-content"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+</body>
+</html>
