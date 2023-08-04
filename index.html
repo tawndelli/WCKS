@@ -61,15 +61,9 @@
     </style>
 
     <style type="text/css">
-        body {
-            min-width:500px;
-        }
-
-        iframe {
-            height: 100vh;
-            width: 100vw;
-            border: 0;
-            overflow:hidden;
+        html, body {
+            height: 100%;
+            margin: 0; /* Reset default margin on the body element */
         }
 
         .hidden.menu {
@@ -203,8 +197,7 @@
     </script>
 </head>
 <body>
-
-    <!-- header menu -->
+    <!-- following menu -->
     <div class="ui top fixed hidden menu">
         <div class="ui container">
             <a class="active item homepage" onclick="navigate('homepage')">
@@ -241,9 +234,9 @@
     </div>
 
     <!-- page contents -->
-    <div class="pusher">
+    <div class="pusher" >
         <!-- masthead -->
-        <div class="ui inverted masthead center aligned top attached basic segment row" style="background-color:black; margin-bottom:20px;">
+        <div class="ui inverted vertical masthead" style="background-color:black; margin-bottom:20px;">
             <!--top masthead menu-->
             <div class="ui container">
                 <div class="ui big secondary inverted pointing menu">
@@ -281,13 +274,13 @@
             </div>
         </div>
 
-        <iframe id="mainFrame" src="home.html" frameborder="0" scrolling="yes" onload="resizeIframe()" style="height:fit-content"></iframe>
+        <iframe id="mainFrame" src="home.html" frameborder="0" scrolling="auto" style="width:100vw;height:100vh;overflow:hidden;"></iframe>
 
         <!-- footer -->
-        <div class="ui inverted bottom attached basic segment very padded" style="margin-top:50px;">
+        <div class="ui inverted vertical footer segment" style="margin-top:25px;">
             <div class="ui container">
-                <div class="ui stackable inverted divided equal height stackable grid center aligned">
-                    <div class="three wide column">
+                <div class="ui stackable inverted divided equal height stackable grid">
+                    <div class="four wide column">
                         <h4 class="ui inverted header">Socials</h4>
                         <div class="ui animated list">
                             <div class="item"><form><button class="ui facebook button" style="width:125px;" formaction="http://facebook.com/wckshouston" formtarget="_blank"><i class="facebook icon"></i>Facebook</button></form></div>
@@ -301,34 +294,29 @@
                             <div class="item"><form><button class="ui icon button" formaction=""><i class="phone icon"></i></button></form></div>
                             <div class="item"><form><button class="ui icon button" formaction=""><i class="mail icon"></i></button></form></div>
                         </div>
-
                     </div>
-                    <div class="ten wide column">
+                    <div class="nine wide column">
                         <h4 class="ui inverted header">Location</h4>
-                        <div class="ui segments">
-                            <div class="ui  inverted segment">
-                                <p>
-                                    <i class="home icon"></i>Wing Chun Kali System<br />
-                                    (Inside Iron Sports)
-                                </p>
-                                <p>
-                                    6982 FM 1960 W Ste F 2nd Floor Houston Texas 77069
-                                </p>
-                            </div>
-                            <div class="ui inverted secondary basic segment ">
-                                <div id="map" class="map" style="height:300px;"></div>
-                                <div id="popup" class="ol-popup">
-                                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                                    <div id="popup-content"></div>
-                                </div>
+                        <div>
+                            <p>
+                                <i class="home icon"></i>Wing Chun Kali System<br />
+                                (Inside Iron Sports)
+                            </p>
+                            <p>
+                                6982 FM 1960 W Ste F 2nd Floor Houston Texas 77069
+                            </p>
+                        </div>
+                        <div>
+                            <div id="map" class="map" style="height:300px;"></div>
+                            <div id="popup" class="ol-popup">
+                                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                                <div id="popup-content"></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-   </div>
-
+    </div>
 </body>
 </html>
